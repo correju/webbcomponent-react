@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "types": ["node", "chai", "mocha", "karma"],
+    "jsx": "react"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
