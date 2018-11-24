@@ -21,12 +21,12 @@ module.exports = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: [".ts", ".js"]
+    extensions: [".tsx",".ts", ".js"]
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         use: [
             {loader: "ts-loader"}
         ],
