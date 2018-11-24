@@ -14,6 +14,8 @@ You can read the concepts in:
 [Micro-frontends](https://micro-frontends.org/)
 
 ## The stack
+* Webpack
+* Typescript
 * Native webcomponents
 * React
 * Sass
