@@ -5,7 +5,7 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "types": ["node", "chai", "mocha", "karma"],
+    "types": ["react", "node", "chai", "mocha", "karma"],
     "jsx": "react"
   },
   "exclude": [

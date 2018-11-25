@@ -123,7 +123,6 @@ export abstract class LitReact extends HTMLElement {
     Object.defineProperty(this.prototype, name, {
       get() { return this[key]; },
       set(value) {
-        console.log('dasdsd');
         const oldValue = this[name];
         this[key] = value;
         this.requestPropertyUpdate(name, oldValue, options);
