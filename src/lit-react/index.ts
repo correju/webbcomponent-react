@@ -1,3 +1,4 @@
+import retargetEvents from 'react-shadow-dom-retarget-events';
 
 export { property } from './decorators';
 
@@ -57,7 +58,9 @@ export interface IPropertyDeclaration<T = any> {
    */
   hasChanged?(value: T, oldValue: T): boolean;
 }
-
+interface IMyEvent extends Event {
+  path: any;
+}
 type IHasChanged = (value: unknown, old: unknown) => boolean;
 
 const microtaskPromise = new Promise((resolve) => resolve(true));
@@ -82,7 +85,10 @@ const defaultPropertyDeclaration: IPropertyDeclaration = {
   reflect : false,
   type : String,
 };
-
+/**
+ * This class was base on lit-element class
+ * still some functionality to be implemented
+ */
 export abstract class LitReact extends HTMLElement {
   protected renderRoot?: Element|DocumentFragment;
 
@@ -91,8 +97,11 @@ export abstract class LitReact extends HTMLElement {
   protected createRenderRoot(): Element|ShadowRoot {
     return this.attachShadow({mode : 'open'});
   }
+  public containerAppCreated(){}
+
   private createAppContainer() {
     this.mountPoint = this.renderRoot.appendChild(document.createElement('div'));
+    this.containerAppCreated();
   }
   public static observableProperties: Array<string|symbol> = [];
 
@@ -141,10 +150,10 @@ export abstract class LitReact extends HTMLElement {
     }
     this.render();
   }
-
   constructor() {
     super();
     this.renderRoot = this.createRenderRoot();
     this.createAppContainer();
+    retargetEvents(this.renderRoot);
   }
 }

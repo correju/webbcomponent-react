@@ -1,6 +1,7 @@
 import { LitReact, property } from '../../lit-react';
 import * as React from "react";
 import { render } from 'react-dom';
+import { StyleSheetManager }  from 'styled-components/';
 
 import Foo from '../reactComponents/foo';
 
@@ -11,6 +12,9 @@ class TodoApp extends LitReact{
   @property({type: Array})
   private comments = [];
 
+
+  private styleContainer: HTMLElement;
+
   constructor() {
     super();
     setTimeout(() => {
@@ -20,20 +24,20 @@ class TodoApp extends LitReact{
       .then(response => response.json())
       .then(json => {
         this.comments = json;
-        setTimeout(() => {
-          this.comments=[{
-            postId: 1500,
-            id: 1800,
-            name: 'Julian',
-            email: 'correa.julian@gmail.com',
-            body: 'BLAH BLAH BLAH',
-          }, ...this.comments]
-        }, 5000)
       });
   }
+  public containerAppCreated() {
+    this.styleContainer = document.createElement('div');
+    this.shadowRoot.append(this.styleContainer);
+  }
+  // ts-ignore
   public render() {
     render(
-      <Foo comments={this.comments}/>,
+      <>
+        <StyleSheetManager target={this.styleContainer}>
+          <Foo comments={this.comments}/>
+        </StyleSheetManager>
+      </>,
       this.mountPoint
     )
   }
