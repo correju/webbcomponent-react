@@ -16,6 +16,14 @@ interface IState{
 const Ul = styled.ul`
   list-style-type: none
   padding: 0;
+  background-color: black;
+  width: calc(100% - 2rem);
+`;
+
+const Div = styled.div`
+  background-color: black;
+  width: 100%;
+  padding: 1rem;
 `;
 let color: string = 'red';
 
@@ -29,32 +37,23 @@ const Li = styled.li`
   border: 1px solid ${(props) => props.color};
   margin: 15px 0;
   border-radius: 1rem;
+  color: white;
 `;
 
-export default class Foo extends React.Component<IProps, IState>{
-  public state: IState = {color: 'red'};
-  constructor(props) {
-    super(props);
-  }
-  private clickHandler() {
-    this.setState({...this.state, color: `#${Math.floor(Math.random()*16777215).toString(16)}`});
-  }
-  public render() {
-    console.log(this.state);
-    return (
-      <>
-        <button onClick={() => this.clickHandler()}>click me</button>
-        <Ul className="comments-list">
-        {
-          (this.props.comments || []).map(e => (
-            <Li color={this.state.color} key={e.id.toString()}>
-              <h5>{e.name}</h5>
-              <p>{e.body}</p>
-            </Li>
-          ))
-        }
-        </Ul>
-      </>
-    );
-  }
-}
+const clickHandler = () => color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+
+export default (props) => (
+  <Div>
+    <button onClick={() => clickHandler()}>click me</button>
+    <Ul className="comments-list">
+    {
+      (props.comments || []).map(e => (
+        <Li color={color} key={e.id.toString()}>
+          <h5>{e.name}</h5>
+          <p>{e.body}</p>
+        </Li>
+      ))
+    }
+    </Ul>
+  </Div>
+);
